@@ -10,11 +10,6 @@
 	<script src="http://cdn.bootcss.com/tether/1.3.2/js/tether.js"></script>
 	<script src="http://cdn.bootcss.com/bootstrap/4.0.0-alpha.2/js/bootstrap.js"></script>
 	<script>
-		var ws= new WebSocket('ws://localhost:8180');
-		var nickname;
-		ws.onopen = function(e){
-			console.log('Connection to server opened');
-		}
 		function sendMessage(){
 			var message = $('#message').val().trim();
 			var username = $('#username').val().trim();
@@ -22,8 +17,18 @@
 				alert("不能发送空内容！");
 				return;
 			}
-			var str = $('#username').val() + ':' + $('#message').val();
-			ws.send(str);
+			const data = {
+				user: username,
+				msg: message
+			}
+			$.ajax({
+				url: '/getData',
+				data: data,
+				type: "POST",
+				success: function(res){
+					console.log(res);
+				}
+			})
 			$('#message').val("");
 			$('#message').focus();
 			alert('谢谢');
