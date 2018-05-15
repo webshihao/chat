@@ -31,7 +31,6 @@ http.createServer(function (req, res) {
     fs.exists(pathname,function(exists){
         if(exists){
             fs.readFile(pathname,function (err,data){
-                console.log(data)
                 res.end(data);
             });
         } else {
@@ -40,4 +39,4 @@ http.createServer(function (req, res) {
         }
     });
 }).listen(8081);
-console.log("Server running at localhost");
+console.log("Server running~~");
